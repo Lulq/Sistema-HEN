@@ -1,2 +1,2 @@
 # Sistema HEN
- Sistema de acompanhamento de crescimento de potros.
+ Sistema de acompanhamento de **crescimento** de potros.
