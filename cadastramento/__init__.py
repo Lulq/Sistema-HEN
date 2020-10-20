@@ -1,6 +1,7 @@
 import pandas as pd
 from interface import *
 from os import remove
+from plotagem import *
 
 
 
@@ -73,11 +74,37 @@ def dropCadastro():
                     print(f'{animal} excluído com sucesso.')
                 else:
                     break
+    
+
+def enlistCadastrados(): #todo quebrar em 2 funções uma que retorna o animal e outra que recebe esse parametro e faz o resto das plotagens
+    cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista
+    cadastrados.sort()
+    cadastrados.append('Voltar')  # adiciona a opção voltar à posição len(cadastrados)
+   
+    return cadastrados
+
+       
+def selectCadastro(cadastrados):
+    resp2 = menu(cadastrados, 'ANIMAIS CADASTRADOS')  # menu com a lista de animais + voltar
+    return resp2
+
+def showData(animalnum, listacadastrados):
+    for indice, valor in enumerate(listacadastrados):  # gira a lista de cadastrados pra pegar o nome do arquivo
+                        # a ser lido
+        if animalnum == indice + 1:
+            animal = valor
+            dados = pd.read_csv(f'arquivo/{animal}.csv')
+            resp2_x = menu(['Ver dados', 'Plotar crescimento', 'Alterar dados', 'Voltar'], animal)
+            if resp2_x == 1:
+                print(f'Nome: {dados["nome"][0]:>36}')
+                print(f'Nascimento: {dados["dnasc"][0]:>30}')
+                print(f'Pelagem: {dados["pelagem"][0]:>33}')
+                print(f'Sexo: {dados["sexo"][0]:>36}')
+                print(f'Altura: {dados["medidas"].max():>32}cm')
+
+
 
   
-
-
-
 
 def arquivoExiste(nome):
     try:
@@ -115,30 +142,11 @@ def addtocadastrados(arq, nome='desconhecido'):
 
 
 def savetocsv(cadastro):
-    global cadastrados
     df = pd.DataFrame(cadastro)
     df.to_csv(f'arquivo/{df["nome"][0]}.csv')
     addtocadastrados('cadastrados.txt',nome=df["nome"][0])
 
     return df
-
-
-
-def txtTolist(nome):
-    try:
-        a = open(nome,'rt')   # abre o arquivo no modo de leitura
-    except:
-        print('ERRO ao ler o arquivo')
-    else:
-        cadastrados = [] #cria uma lista onde serão inseridos os dados das linhas do arquivo
-        for linha in a:
-            dado = linha.split('\n') # separa os dados por quebra de linha '\n'
-            cadastrados.append(dado[0]) # especifica que somente o escrito sera inserido na lista ([0])
-    finally:
-        return cadastrados  # retorna a lista criada
-        a.close()  # fecha o arquivo
-
-
 
 def lerArquivo(nome): # inutilizada
     '''
