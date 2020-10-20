@@ -2,24 +2,21 @@ from plotagem import *
 from interface import *
 from cadastramento import *
 
+#checa se o arquivo de cadastros existe, e o cria em caso de negativo
+
 arq = arquivoExiste('cadastrados.txt')
 if not arq:
     criarArquivo('cadastrados.txt')
 
-while True:
-    while True:
-        resposta = menu(['Cadastrar novo indivíduo', 'Ver animais cadastrados', 'Sair'], 'MENU PRINCIPAL')
+# laço maior - menu principal 
 
+while True:
+    #menu principal
+    while True:
+        resposta = menu(['Cadastrar novo indivíduo', 'Ver animais cadastrados', 'Excluir animal cadastrado', 'Sair'], 'MENU PRINCIPAL')
+        # Cadastrar novo indivíduo
         if resposta == 1:
-            cabeçalho('NOVO CADASTRO')
-            recip = cadastrar()
-            resp1 = menu(['Salvar dados?', 'Descartar e voltar'], 'SALVAR')
-            while True:
-                if resp1 == 1:
-                    savetocsv(recip)
-                    break
-                elif resp1 == 2:
-                    break
+           novoCadastro()
 
         elif resposta == 2:
             cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista
@@ -62,9 +59,14 @@ while True:
                 elif resp2_x == 4:
                     break
 
+        
         elif resposta == 3:
+            dropCadastro()
+
+        elif resposta == 4:
             print('Volte sempre, até logo!')
             break
+
     break
 
 # andy = pd.read_csv('Andrômeda do Estrela Negra.csv')

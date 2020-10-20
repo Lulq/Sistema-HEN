@@ -1,5 +1,6 @@
 import pandas as pd
 from interface import *
+from os import remove
 
 
 
@@ -23,6 +24,9 @@ def pelagens():
 
 
 def cadastrar():
+    '''
+    Coleta todos os dados do animal
+    '''
     lista = []
     indice = []
     cadastro = {'nome': input('Nome: '), 'dnasc': leiaData('Dia-Mês-Ano de nascimento: '),
@@ -36,6 +40,43 @@ def cadastrar():
 
     print(cadastro)
     return cadastro
+
+def novoCadastro():
+    '''
+    salva novo cadastro
+    '''
+    cabeçalho('NOVO CADASTRO')
+    recip = cadastrar()
+    resp1 = menu(['Salvar dados?', 'Descartar e voltar'], 'SALVAR')
+    while True:
+        if resp1 == 1:
+            savetocsv(recip)
+            break
+        elif resp1 == 2:
+            break
+
+def dropCadastro():
+    cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista
+    cadastrados.sort()
+    cadastrados.append('Voltar')  # adiciona a opção voltar à posição len(cadastrados)
+    while True:
+        resp2 = menu(cadastrados, 'EXCLUIR CADASTRO')  # menu com a lista de animais + voltar
+        if resp2 == len(cadastrados):
+            break
+        for indice, valor in enumerate(cadastrados):  # gira a lista de cadastrados pra pegar o nome do arquivo
+                    # a ser lido
+            if resp2 == indice + 1:
+                animal = valor
+                confirm = menu(['Sim','Não'], f'DESEJA REALMENTE EXCLUIR {animal}?')
+                if confirm == 1:
+                    dados = remove(f'arquivo/{animal}.csv')
+                    print(f'{animal} excluído com sucesso.')
+                else:
+                    break
+
+  
+
+
 
 
 def arquivoExiste(nome):
@@ -80,6 +121,7 @@ def savetocsv(cadastro):
     addtocadastrados('cadastrados.txt',nome=df["nome"][0])
 
     return df
+
 
 
 def txtTolist(nome):
