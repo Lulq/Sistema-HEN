@@ -56,6 +56,23 @@ def novoCadastro():
         elif resp1 == 2:
             break
 
+
+def dropLineTxt(file, animal):
+    try:
+        f = open(file,'r', encoding='utf8')
+        lines = f.readlines()
+        f.close()
+        f = open('cadastrados.txt','w',encoding='utf8')
+        for line in lines:
+            if line != animal +'\n':
+                f.write(line)
+        f.close()
+    except:
+        print('Algum problema ao excluir o animal da lista de cadastrados!')
+    finally:
+        print(f'{animal} excluído da lista de cadastrados com sucesso!')
+    
+
 def dropCadastro():
     cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista
     cadastrados.sort()
@@ -71,7 +88,9 @@ def dropCadastro():
                 confirm = menu(['Sim','Não'], f'DESEJA REALMENTE EXCLUIR {animal}?')
                 if confirm == 1:
                     dados = remove(f'arquivo/{animal}.csv')
-                    print(f'{animal} excluído com sucesso.')
+                    print(f'Dados de {animal} excluídos com sucesso!')
+                    dropLineTxt('cadastrados.txt',animal)
+
                 else:
                     break
     
