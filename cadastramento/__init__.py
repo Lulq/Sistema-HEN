@@ -84,23 +84,32 @@ def enlistCadastrados(): #todo quebrar em 2 funções uma que retorna o animal e
     return cadastrados
 
        
-def selectCadastro(cadastrados):
-    resp2 = menu(cadastrados, 'ANIMAIS CADASTRADOS')  # menu com a lista de animais + voltar
-    return resp2
-
-def showData(animalnum, listacadastrados):
+def nomeEscolhido(animalnum, listacadastrados):
     for indice, valor in enumerate(listacadastrados):  # gira a lista de cadastrados pra pegar o nome do arquivo
                         # a ser lido
         if animalnum == indice + 1:
             animal = valor
             dados = pd.read_csv(f'arquivo/{animal}.csv')
-            resp2_x = menu(['Ver dados', 'Plotar crescimento', 'Alterar dados', 'Voltar'], animal)
-            if resp2_x == 1:
-                print(f'Nome: {dados["nome"][0]:>36}')
-                print(f'Nascimento: {dados["dnasc"][0]:>30}')
-                print(f'Pelagem: {dados["pelagem"][0]:>33}')
-                print(f'Sexo: {dados["sexo"][0]:>36}')
-                print(f'Altura: {dados["medidas"].max():>32}cm')
+    return animal, dados
+
+def getData(dados):
+    nome = dados["nome"][0]
+    nascimento = dados["dnasc"][0]
+    pelagem = dados["pelagem"][0]
+    sexo = dados["sexo"][0]
+    altura = dados["medidas"].max()
+
+    return nome, nascimento, pelagem, sexo, altura
+    
+
+def showData(dados):
+    print(f'Nome: {dados["nome"][0]:>36}')
+    print(f'Nascimento: {dados["dnasc"][0]:>30}')
+    print(f'Pelagem: {dados["pelagem"][0]:>33}')
+    print(f'Sexo: {dados["sexo"][0]:>36}')
+    print(f'Altura: {dados["medidas"].max():>32}cm')
+    
+    
 
 
 

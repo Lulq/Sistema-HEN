@@ -84,6 +84,7 @@ def leiaSexo(txt):
             print('ERRO! Digite M para Macho ou F para Fêmea.')
     return a
 
+
 def txtTolist(nome):
     try:
         a = open(nome,'rt', encoding='utf-8')   # abre o arquivo no modo de leitura #adicionado o encoding por problemas de acentuação

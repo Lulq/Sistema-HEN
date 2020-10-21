@@ -22,11 +22,38 @@ while True:
         elif resposta == 2:
             while True:
                 cadastrados= enlistCadastrados() #lista de animais cadastrados + voltar
-                select = selectCadastro(cadastrados) #número do animal escolhido
+                select = menu(cadastrados, 'ANIMAIS CADASTRADOS') #menu ver animais retorna > número do animal escolhido
                 if select == len(cadastrados): #opção voltar
                     break
-                else:
-                    showData(select, cadastrados)
+                elif 0 < select < len(cadastrados):
+                    escolhido, df_escolhido = nomeEscolhido(select,cadastrados)
+                    while True:
+                        resposta2 = menu(['Ver dados', 'Plotar crescimento', 'Alterar dados', 'Voltar'], escolhido)
+                        #ver dados
+                        if resposta2 == 1:
+                            showData(df_escolhido)
+                        #plotar crescimento
+                        elif resposta2 == 2:
+                            while True:
+                                resposta3 = menu(['Comparar com as médias da raça', 'Comparar outro animal cadastrado',
+                                                   'Prever crescimento', 'Voltar'], 'Plotar Crescimento')
+                                if resposta3 == 4:
+                                    break
+
+                                elif resposta3 == 1:
+                                    plotxpadrões(df_escolhido)
+
+                                elif resposta3 == 2:
+                                    resposta4 = menu(cadastrados, 'Com que animal deseja comparar?')
+                                    if resposta4 == len(cadastrados):
+                                        break
+                                    escolhido2 = cadastrados[resposta4 - 1]
+                                    plotXplot(df_escolhido, escolhido2)
+
+                        #voltar
+                        elif resposta2 == 4:
+                            break
+                        
 
             
         
