@@ -53,9 +53,7 @@ while True:
                         #voltar
                         elif resposta2 == 4:
                             break
-                        
-
-            
+       
         
         elif resposta == 3:
             dropCadastro()
