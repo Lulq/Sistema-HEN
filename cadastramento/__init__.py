@@ -109,11 +109,6 @@ def showData(dados):
     print(f'Sexo: {dados["sexo"][0]:>36}')
     print(f'Altura: {dados["medidas"].max():>32}cm')
     
-    
-
-
-
-  
 
 def arquivoExiste(nome):
     try:
