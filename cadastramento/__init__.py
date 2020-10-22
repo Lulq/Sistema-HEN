@@ -95,9 +95,8 @@ def dropCadastro():
                     break
     
 
-def enlistCadastrados(): #todo quebrar em 2 funções uma que retorna o animal e outra que recebe esse parametro e faz o resto das plotagens
+def enlistCadastrados():
     cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista
-    cadastrados.sort()
     cadastrados.append('Voltar')  # adiciona a opção voltar à posição len(cadastrados)
    
     return cadastrados
