@@ -50,13 +50,23 @@ while True:
                                     escolhido2 = cadastrados[resposta4 - 1]
                                     plotXplot(df_escolhido, escolhido2)
 
+                        #alterar cadastro
+                        elif resposta2 == 3:
+                            while True:
+                                resposta5 = menu(['Nome','Data de Nascimento', 'Pelagem', 'Sexo','Alturas','Alterar tudo','Excluir animal','Voltar'], f'{escolhido} - DESEJA ALTERAR...')
+                                if resposta5 == 8:
+                                    break
+                                elif resposta5 == 7:
+                                    dropCadastro(escolhido)
+                                    break
                         #voltar
                         elif resposta2 == 4:
                             break
+                        
        
         
         elif resposta == 3:
-            dropCadastro()
+            selectAndDropCadastro()
 
         elif resposta == 4:
             print('Volte sempre, até logo!')

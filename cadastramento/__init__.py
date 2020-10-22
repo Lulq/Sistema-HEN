@@ -73,7 +73,10 @@ def dropLineTxt(file, animal):
         print(f'{animal} excluído da lista de cadastrados com sucesso!')
     
 
-def dropCadastro():
+def selectAndDropCadastro():
+    '''
+    Apresenta uma lista de cadastrados e pede pra selecionar um deles para remoção
+    '''
     cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista
     cadastrados.sort()
     cadastrados.append('Voltar')  # adiciona a opção voltar à posição len(cadastrados)
@@ -93,7 +96,20 @@ def dropCadastro():
 
                 else:
                     break
-    
+
+def dropCadastro(nome):
+    '''
+    Remove um único cadastro pelo nome
+    Exclui tanto o arquivo csv quanto o nome do cadastrados.txt
+    '''
+    resposta= menu(['Sim','Não'],f'Confirma exclusão de {nome}?')
+    if resposta == 1:
+        remove(f'arquivo/{nome}.csv')
+        print(f'Dados de {nome} excluídos com sucesso!')
+        dropLineTxt('cadastrados.txt',nome)
+    else:
+        pass
+
 
 def enlistCadastrados():
     cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista

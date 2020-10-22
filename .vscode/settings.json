@@ -1,4 +1,6 @@
 {
     "python.pythonPath": "C:\\Users\\lulal\\Anaconda3\\envs\\teste\\python.exe",
-    "terminal.explorerKind": "external"
+    "terminal.explorerKind": "external",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }
