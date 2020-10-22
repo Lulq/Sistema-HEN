@@ -97,6 +97,7 @@ def dropCadastro():
 
 def enlistCadastrados():
     cadastrados = txtTolist('cadastrados.txt')  # converte o txt dos cadastrados em uma lista
+    cadastrados = sorted(cadastrados)
     cadastrados.append('Voltar')  # adiciona a opção voltar à posição len(cadastrados)
    
     return cadastrados
@@ -150,7 +151,7 @@ def criarArquivo(nome):
 
 def addtocadastrados(arq, nome='desconhecido'):
     try:
-        a = open(arq, 'at')
+        a = open(arq, 'at', encoding='utf8')
     except:
         print('Houve um ERRO na abertura do arquivo!')
     else:

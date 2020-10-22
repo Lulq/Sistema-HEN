@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\lulal\\Anaconda3\\envs\\teste\\python.exe"
+    "python.pythonPath": "C:\\Users\\lulal\\Anaconda3\\envs\\teste\\python.exe",
+    "terminal.explorerKind": "external"
 }
