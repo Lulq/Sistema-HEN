@@ -60,7 +60,8 @@ while True:
                                     dropCadastro(escolhido)
                                     break
                                 elif resposta5 == 6:
-                                    
+                                    novoCadastro() #TODO alterar 
+
                         #voltar
                         elif resposta2 == 4:
                             break
