@@ -143,6 +143,10 @@ def showData(dados):
     print(f'Pelagem: {dados["pelagem"][0]:>33}')
     print(f'Sexo: {dados["sexo"][0]:>36}')
     print(f'Altura: {dados["medidas"].max():>32}cm')
+
+def alterItem(df,item):
+    df[item] = input('Novo nome: ')
+    print(f'Nome alterado para {df[item]}')
     
 
 def arquivoExiste(nome):
@@ -181,9 +185,12 @@ def addtocadastrados(arq, nome='desconhecido'):
 
 
 def savetocsv(cadastro):
-    df = pd.DataFrame(cadastro)
-    df.to_csv(f'arquivo/{df["nome"][0]}.csv')
-    addtocadastrados('cadastrados.txt',nome=df["nome"][0])
+    '''
+    Recebe um dicionário como parâmetro e converte pra arquivo .csv
+    '''
+    df = pd.DataFrame(cadastro) #transforma o dicionário em dataframe
+    df.to_csv(f'arquivo/{df["nome"][0]}.csv') #salva o dataframe com o nome do animal
+    addtocadastrados('cadastrados.txt',nome=df["nome"][0]) #inclui o nome do animal no arquivo cadastrados.txt
 
     return df
 

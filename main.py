@@ -59,6 +59,8 @@ while True:
                                 elif resposta5 == 7:
                                     dropCadastro(escolhido)
                                     break
+                                elif resposta5 == 6:
+                                    
                         #voltar
                         elif resposta2 == 4:
                             break
