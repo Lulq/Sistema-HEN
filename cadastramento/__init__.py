@@ -158,8 +158,12 @@ def alterName(df,item):
 
 def alterItem(df,item,dado):
     df[item] = dado
-    del df['Unnamed: 0']
-    df.to_csv(f'arquivo/{df["nome"][0]}.csv')
+    try:
+        del df['Unnamed: 0']
+    except:
+        print('\o/')
+    finally:
+        df.to_csv(f'arquivo/{df["nome"][0]}.csv')
     
 def insertAltura(animal,mes,medida):
 
