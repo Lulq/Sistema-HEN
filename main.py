@@ -53,15 +53,46 @@ while True:
                         #alterar cadastro
                         elif resposta2 == 3:
                             while True:
-                                resposta5 = menu(['Nome','Data de Nascimento', 'Pelagem', 'Sexo','Alturas','Alterar tudo','Excluir animal','Voltar'], f'{escolhido} - DESEJA ALTERAR...')
-                                if resposta5 == 8:
-                                    break
-                                elif resposta5 == 7:
-                                    dropCadastro(escolhido)
+                                resposta5 = menu(['Nome','Data de Nascimento', 'Pelagem', 'Sexo','Adicionar Medição', 'Excluir animal','Voltar'], f'{escolhido} - DESEJA ALTERAR...')
+                                if resposta5 == 7:
                                     break
                                 elif resposta5 == 6:
-                                    novoCadastro() #TODO alterar 
-
+                                    resposta= menu(['Sim','Não'],f'Confirma exclusão de {escolhido}?')
+                                    if resposta == 1:
+                                        dropCadastro(escolhido)
+                                        break
+                                    else:
+                                        break
+                               
+                                elif resposta5 == 1:
+                                    alterName(df_escolhido,'nome')
+                                    break
+                                elif resposta5 == 2:
+                                    newdate = leiaData('Informe a nova data de nascimento:')
+                                    alterItem(df_escolhido, 'dnasc', newdate)
+                                    print('Data de nascimento atualizada!')
+                                    break
+                                elif resposta5 == 3:
+                                    newcolor = pelagens('Nova ')
+                                    alterItem(df_escolhido, 'pelagem', newcolor)
+                                    print(f'Pelagem alterada para {newcolor}')
+                                    break
+                                elif resposta5 == 4:
+                                    newsex = leiaSexo('Informe o Sexo[M/F]: ')
+                                    alterItem(df_escolhido, 'sexo', newsex)
+                                    print(f'Sexo alterado para {newsex}')
+                                    break
+                                elif resposta5 == 5:
+                                    while True:
+                                        mes = leiaInt('Para qual mês deseja informar a altura? ')
+                                        alt = leiaInt('Qual a altura(em cm)? ')
+                                        resposta = menu(['Sim','Não'], f'{alt} cm aos {mes} meses, confirma?')
+                                        if resposta == 2:
+                                            break
+                                        elif resposta == 1:
+                                            insertAltura('Lula',mes,alt)
+                                            print(f'Medida:{alt} cm para o mês: {mes} adicionada.')
+                                            break
                         #voltar
                         elif resposta2 == 4:
                             break

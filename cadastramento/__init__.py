@@ -5,9 +5,9 @@ from plotagem import *
 
 
 
-def pelagens():
+def pelagens(txt=''):
     pelagens = ['Alazão', 'Amarillho', 'Baio', 'Pampa', 'Preta', 'Rosilho', 'Tordilho']
-    escolha = menu(pelagens, 'Pelagem Principal:')
+    escolha = menu(pelagens, txt+'Pelagem Principal:')
     for i, v in enumerate(pelagens):
         if escolha == i+1:
             prim = pelagens[i]
@@ -34,7 +34,7 @@ def cadastrar():
                 'sexo': leiaSexo('Sexo: '), 'pelagem': pelagens(), 'meses informados': indice, 'medidas': lista}
     atual = leiaInt('Com quantos meses de idade foi registrada a última medição? ')  # usar datetime pra calcular automaticamente
     for x in range(atual + 1):
-        y = leiaFloat(f'Informe a altura de cernelha em cm para o mes {x}: (0 caso não exista.) ')
+        y = leiaInt(f'Informe a altura de cernelha em cm para o mes {x}: (0 caso não exista.) ')
         if y > 0:
             lista.append(y)
             indice.append(x)
@@ -102,13 +102,10 @@ def dropCadastro(nome):
     Remove um único cadastro pelo nome
     Exclui tanto o arquivo csv quanto o nome do cadastrados.txt
     '''
-    resposta= menu(['Sim','Não'],f'Confirma exclusão de {nome}?')
-    if resposta == 1:
-        remove(f'arquivo/{nome}.csv')
-        print(f'Dados de {nome} excluídos com sucesso!')
-        dropLineTxt('cadastrados.txt',nome)
-    else:
-        pass
+    remove(f'arquivo/{nome}.csv')
+    print(f'Dados de {nome} excluídos com sucesso!')
+    dropLineTxt('cadastrados.txt',nome)
+    
 
 
 def enlistCadastrados():
@@ -144,9 +141,71 @@ def showData(dados):
     print(f'Sexo: {dados["sexo"][0]:>36}')
     print(f'Altura: {dados["medidas"].max():>32}cm')
 
-def alterItem(df,item):
-    df[item] = input('Novo nome: ')
-    print(f'Nome alterado para {df[item]}')
+def alterName(df,item):
+    selecionado = str(df[item][0])
+    df.nome = str(input('Novo nome: '))
+    print(f'Nome alterado para {df[item][0]}')
+    while True:
+        resp = menu(['Sim','Não'], 'Deseja Confirmar a mudança?')
+        if resp == 1:
+            del df['Unnamed: 0']
+            df.to_csv(f'arquivo/{df["nome"][0]}.csv')
+            addtocadastrados('cadastrados.txt', f'{df["nome"][0]}' )
+            dropCadastro(selecionado)
+            break
+        else:
+            break
+
+def alterItem(df,item,dado):
+    df[item] = dado
+    try:
+        del df['Unnamed: 0']
+    except:
+        print('\o/')
+    finally:
+        df.to_csv(f'arquivo/{df["nome"][0]}.csv')
+    
+def insertAltura(animal,mes,medida):
+
+    colect = []
+    labels = open(f'arquivo/{animal}.csv','r').readline().strip().split(',') #pega os labels das colunas e bota em uma lista
+    #cria uma lista de dicionários com todos os dados do csv
+    with open(f'arquivo/{animal}.csv', 'r') as dados:
+        for dado in dados.readlines():
+            d = dado.strip().replace('\n','')
+            d_lista = d.split(",")
+            animal_dict = {}
+            for indice, valor in enumerate(d_lista):
+                animal_dict[labels[indice]] = valor
+            colect.append(animal_dict)
+
+    del colect[0] #elimina a primeira linha que contem apenas labels
+    primedic = colect[0] # pega o primeiro dicionário da lista de dicionários para servir de modelo de dicionário
+    del primedic['']
+    #cria duas listas para armazenar os meses informados e as alturas desses meses
+    listaDeMeses = []  
+    listaDeAlturas = []
+    #roda um loop do tamanho da quantidade de dicionários da grande lista que é definida pela quantidade de meses informados
+    for i in range(len(colect)):
+        listaDeMeses.append(i) #adiciona os índices a lista de meses informados 
+        alt = colect[i].get('medidas') #pega as alturas informadas em cada mês informado
+        listaDeAlturas.append(int(alt)) #adiciona as alturas a lista de Alturas
+    
+    #adição dos dados informados (adicionar verificação depois)
+    listaDeMeses.append(mes) 
+    listaDeAlturas.append(medida)
+    
+    #adiciona as listas ao dicionário modelo
+    primedic['meses informados'] = listaDeMeses
+    primedic['medidas'] = listaDeAlturas
+    
+    remove(f'arquivo/{animal}.csv') #remove versão anterior do csv
+    df = pd.DataFrame(primedic) #transforma o dicionário em dataframe
+    df.to_csv(f'arquivo/{df["nome"][0]}.csv') #salva o dataframe atualizado com a nova medida
+
+
+    
+
     
 
 def arquivoExiste(nome):
@@ -184,11 +243,11 @@ def addtocadastrados(arq, nome='desconhecido'):
             a.close()
 
 
-def savetocsv(cadastro):
+def savetocsv(dicionario):
     '''
     Recebe um dicionário como parâmetro e converte pra arquivo .csv
     '''
-    df = pd.DataFrame(cadastro) #transforma o dicionário em dataframe
+    df = pd.DataFrame(dicionario) #transforma o dicionário em dataframe
     df.to_csv(f'arquivo/{df["nome"][0]}.csv') #salva o dataframe com o nome do animal
     addtocadastrados('cadastrados.txt',nome=df["nome"][0]) #inclui o nome do animal no arquivo cadastrados.txt
 

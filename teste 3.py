@@ -2,22 +2,13 @@ from cadastramento import *
 from interface import *
 
 
-df = pd.read_csv('arquivo/Grego.csv')
+while True:
+    mes = leiaInt('Para qual mês deseja informar a altura? ')
+    alt = leiaInt('Qual a altura(em cm)? ')
+    resposta = menu(['Sim','Não'], f'{alt} cm aos {mes} meses, confirma?')
 
-def alterItems(df,item):
-    selecionado = str(df[item][0])
-    df[item] = input('Novo nome: ')
-    print(f'Nome alterado para {df[item][0]}')
-    while True:
-        resp = menu(['Sim','Não'], 'Deseja Confirmar a mudança?')
-        if resp == 1:
-            df.to_csv(f'arquivo/{df["nome"][0]}.csv')
-            addtocadastrados('cadastrados.txt', f'{df["nome"][0]}' )
-            dropCadastro(selecionado)
-            break
-        else:
-            break
-
-alterItems(df,'nome')
-
-
+    if resposta == 2:
+        break
+    elif resposta == 1:
+        insertAltura('Lula',mes,alt)
+        break
