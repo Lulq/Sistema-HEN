@@ -1,8 +1,7 @@
 # Sistema HEN - MM Foals Growth Preview
- Sistema de acompanhamento de **crescimento** de potros.
  
 MM Foals Growth Preview is a Python based system for helping Mangalarga Marchador horse's breeders with predicting foals growth supporting nutricional management and genetic selection.
-
+(Sistema de acompanhamento de **crescimento** de potros.)
 ## Installation
 
 Just run the *main.py*.
