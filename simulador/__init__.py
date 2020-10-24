@@ -1,8 +1,8 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+from plotagem import *
 
-# Referências
-animal = 'Begônia da Santalice'
-dados = pd.read_csv(f'arquivo/{animal}.csv')
+#Referências
 indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15,16,17, 18,19,20,21,22,23, 24, 36, 48, 60]
 dicMacho = {0: 61.7, 1: 67.6, 2: 71.5, 3: 74.9, 4: 77.4, 5: 79.5, 6: 81.1, 7: 82.4, 8: 83.8, 9: 84.9, 10: 86.3, 11: 87.1, 12: 88.0, 13: 88.4, 14: 88.8, 15: 89.2, 16: 89.6, 17: 90, 18: 90.4, 19: 90.8, 20: 91.2, 21: 91.6, 22: 92, 23: 92.5, 24: 92.9, 36: 97.0, 48: 98.9, 60: 100}
 dicFemea = {0: 63.2, 1: 69.1, 2: 73.2, 3: 76.9, 4: 79.0, 5: 81.1, 6: 82.7, 7: 84.5, 8: 85.4, 9: 86.9, 10: 88.4, 11: 88.9, 12: 89.9, 13: 89.92, 14: 89.93, 15: 89.95, 16: 89.96, 17: 89.98, 18: 90.0, 19: 90.5, 20: 91, 21: 91.5, 22: 92, 23: 92.5, 24: 93.0, 36: 96.9, 48: 99.0, 60: 100} 
@@ -12,8 +12,10 @@ def gerarAlturas(df_escolhido):
         retornando um dicionário com alturas para todos os meses índices.
     '''
     
-    meses_informados = df_escolhido['meses informados'] 
-    medidas = df_escolhido['medidas']
+    meses_informados = df_escolhido['meses informados'].tolist() #.tolist() corrigiu o problema 
+    print(f'Estes são os meses informados {meses_informados}')
+    medidas = df_escolhido['medidas'].tolist()
+    print(f'Medidas extraídas para os meses informados: {medidas}')
     # Gera o dicionario modelo para ser posteriormente preenchido nas lacunas.
     modelo = {}
     count = 0
@@ -53,6 +55,5 @@ def gerarAlturas(df_escolhido):
     
     # modelo com as alturas simuladas
     return modelo
-    
-gerado = gerarAlturas(dados)
-print(gerado)
+
+     

@@ -1,7 +1,7 @@
 from plotagem import *
 from interface import *
 from cadastramento import *
-
+from simulador import *
 #checa se o arquivo de cadastros existe, e o cria em caso de negativo
 
 arq = arquivoExiste('cadastrados.txt')
@@ -37,25 +37,32 @@ while True:
                             while True:
                                 resposta3 = menu(['Comparar com as médias da raça', 'Comparar outro animal cadastrado',
                                                    'Prever crescimento', 'Voltar'], 'Plotar Crescimento')
+                                #Voltar
                                 if resposta3 == 4:
                                     break
-
+                                #comparar com as médias da raça
                                 elif resposta3 == 1:
                                     plotxpadrões(df_escolhido)
-
+                                #comparar com outro animal cadastrado
                                 elif resposta3 == 2:
                                     resposta4 = menu(cadastrados, 'Com que animal deseja comparar?')
                                     if resposta4 == len(cadastrados):
                                         break
                                     escolhido2 = cadastrados[resposta4 - 1]
                                     plotXplot(df_escolhido, escolhido2)
+                                elif resposta3 == 3:
+                                    plotDicxpadrões(gerarAlturas(df_escolhido), escolhido)
+                                    break
+                                     
 
                         #alterar cadastro
                         elif resposta2 == 3:
                             while True:
                                 resposta5 = menu(['Nome','Data de Nascimento', 'Pelagem', 'Sexo','Adicionar Medição', 'Excluir animal','Voltar'], f'{escolhido} - DESEJA ALTERAR...')
+                                #sair
                                 if resposta5 == 7:
                                     break
+                                #excluir
                                 elif resposta5 == 6:
                                     resposta= menu(['Sim','Não'],f'Confirma exclusão de {escolhido}?')
                                     if resposta == 1:
@@ -63,25 +70,29 @@ while True:
                                         break
                                     else:
                                         break
-                               
+                               #alterar nome
                                 elif resposta5 == 1:
                                     alterName(df_escolhido,'nome')
                                     break
+                                #alterar data
                                 elif resposta5 == 2:
                                     newdate = leiaData('Informe a nova data de nascimento:')
                                     alterItem(df_escolhido, 'dnasc', newdate)
                                     print('Data de nascimento atualizada!')
                                     break
+                                #alterar pelagem
                                 elif resposta5 == 3:
                                     newcolor = pelagens('Nova ')
                                     alterItem(df_escolhido, 'pelagem', newcolor)
                                     print(f'Pelagem alterada para {newcolor}')
                                     break
+                                #alterar sexo
                                 elif resposta5 == 4:
                                     newsex = leiaSexo('Informe o Sexo[M/F]: ')
                                     alterItem(df_escolhido, 'sexo', newsex)
                                     print(f'Sexo alterado para {newsex}')
                                     break
+                                #adicionar altura
                                 elif resposta5 == 5:
                                     while True:
                                         mes = leiaInt('Para qual mês deseja informar a altura? ')
@@ -98,17 +109,12 @@ while True:
                             break
                         
        
-        
+        # Remover animal cadastrado
         elif resposta == 3:
             selectAndDropCadastro()
-
+        # Sair
         elif resposta == 4:
             print('Volte sempre, até logo!')
             break
 
     break
-
-# andy = pd.read_csv('Andrômeda do Estrela Negra.csv')
-
-
-# plotxpadrões(andy)
