@@ -16,6 +16,7 @@ dicFemea = {0: 63.2, 1: 69.1, 2: 73.2, 3: 76.9, 4: 79.0, 5: 81.1, 6: 82.7, 7: 84
 
 meses_informados = [3, 5, 7]
 medidas = [112, 119, 126 ]
+
 dicAndromeda = {3: 112, 5: 119, 7: 126}
 
 
@@ -23,7 +24,7 @@ IndicexPercentual= {}
 PercentualInd = []
 AltxPercentual = {}
 
-
+'''
 for indice, valor in enumerate(meses_informados):
     IndicexPercentual[valor] = dicFemea[valor]
     PercentualInd.append(dicFemea[valor])
@@ -35,12 +36,13 @@ print(IndicexPercentual)
 # {3: 76.9, 5: 81.1, 7: 84.5}
 print(AltxPercentual)
 # {112: 76.9, 119: 81.1, 126: 84.5}
-
+'''
 modelo = {}
-
+count = 0
 for item in indices:
     if item in meses_informados:
-        modelo[item] = dicAndromeda[item]
+        modelo[item] = medidas[count]
+        count += 1
     else:
         modelo[item] = 0
 
@@ -75,9 +77,12 @@ print(f'A média calculada para 100% de altura é {xmedio}')
 
 
 #motor que vai preencher todos os dados zerados do dicionário modelo
-'''for k,v in modelo.items():
+for k,v in modelo.items():
     if v == 0:
-        modelo[k] = (alturageradapra100porcento * porcentagemnomes/100)'''
+        modelo[k] = (xmedio * dicFemea[k]/100)
+    else:
+        pass
+print(f'o modelo com as alturas simuladas é {modelo}')
 
 
 
