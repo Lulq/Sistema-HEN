@@ -1,4 +1,5 @@
 from colorama import init
+
 init()
 
 def linha(tam=42):
@@ -83,4 +84,21 @@ def leiaSexo(txt):
         else:
             print('ERRO! Digite M para Macho ou F para Fêmea.')
     return a
+
+
+def txtTolist(nome):
+    try:
+        a = open(nome,'rt', encoding='utf-8')   # abre o arquivo no modo de leitura #adicionado o encoding por problemas de acentuação
+    except:
+        print('ERRO ao ler o arquivo')
+    else:
+        cadastrados = [] #cria uma lista onde serão inseridos os dados das linhas do arquivo
+        for linha in a:
+            dado = linha.split('\n') # separa os dados por quebra de linha '\n'
+            cadastrados.append(dado[0]) # especifica que somente o escrito sera inserido na lista ([0])
+    finally:
+        return cadastrados  # retorna a lista criada
+        a.close()  # fecha o arquivo
+
+
 

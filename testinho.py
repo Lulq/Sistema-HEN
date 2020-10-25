@@ -1,3 +1,8 @@
 from cadastramento import *
 
-dropCadastro()
+
+insertAltura('Lula')
+
+
+    
+        
