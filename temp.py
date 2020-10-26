@@ -1,9 +1,11 @@
 from plotagem import *
 from simulador import *
+
+
 #desenvolvendo predição de crescimento
 
 #indices de meses e porcentagens de altura expandidos
-animal = 'Eslovênia da Pedra Montada'
+animal = 'Mistério Xodó do Malta'
 dados = pd.read_csv(f'arquivo/{animal}.csv')
 
 indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15,16,17, 18,19,20,21,22,23, 24, 36, 48, 60]
@@ -19,7 +21,7 @@ dicFemea = {0: 63.2, 1: 69.1, 2: 73.2, 3: 76.9, 4: 79.0, 5: 81.1, 6: 82.7, 7: 84
 
 
 gerado = gerarAlturas(dados)
-print(gerado)
+print(f'Curva de crescimento simulada: {gerado}')
 
 
 plotDicxpadrões(gerado,animal)

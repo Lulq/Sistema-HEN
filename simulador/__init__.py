@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from plotagem import *
+from operator import itemgetter
+
 
 #Referências
 indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15,16,17, 18,19,20,21,22,23, 24, 36, 48, 60]
@@ -11,27 +12,37 @@ def gerarAlturas(df_escolhido):
     ''' Recebe um Dataframe coleta as alturas informadas e gera alturas simuladas para os meses não informados
         retornando um dicionário com alturas para todos os meses índices.
     '''
-    
+    # Meses informados
     meses_informados = df_escolhido['meses informados'].tolist() #.tolist() corrigiu o problema 
-    print(f'Estes são os meses informados {meses_informados}')
+    
+    #Medidas extraídas para os meses informados
     medidas = df_escolhido['medidas'].tolist()
-    print(f'Medidas extraídas para os meses informados: {medidas}')
+
+    # Gera dicionário com meses informados e medidas para esses meses
+    dicMesesMedidas = {}
+    for i, item in enumerate(meses_informados):
+        dicMesesMedidas[item] = medidas[i]
+        
     # Gera o dicionario modelo para ser posteriormente preenchido nas lacunas.
     modelo = {}
-    count = 0
     for item in indices:
-        if item in meses_informados:
-            modelo[item] = medidas[count]
-            count += 1
-        else:
-            modelo[item] = 0
+        modelo[item] = 0
+    
+    #junta 2 dicionários em um com todos os meses e medidas disponíveis + todos os indices sem medidas com 0 como valor
+    modelo.update(dicMesesMedidas)
+    modelo = dict(sorted(modelo.items(), key=itemgetter(0))) #ordena pelas chaves
+    
+    
     #Separa em tuplas mes/altura/porcentagem as medidas disponíveis
     tuplaslist = []
     for k,v in modelo.items():
-        if v != 0:
+        if v != 0 and k in indices: #pega apenas as alturas que tem porcentagem disponível TODO futuramente adicionar mais índices
             mes = k
             altura = v
-            porcentagem = dicFemea[mes]
+            if df_escolhido['sexo'][0] == 'F':
+                porcentagem = dicFemea[mes]
+            else:
+                porcentagem = dicMacho[mes]
             tupla = (mes, altura, porcentagem)
             tuplaslist.append(tupla)
     # gerando o valor de referência para 100%
@@ -47,12 +58,36 @@ def gerarAlturas(df_escolhido):
     xmedio = sum(xlist)/len(xlist)
 
     #motor que vai preencher todos os dados zerados do dicionário modelo
-    for k,v in modelo.items():
-        if v == 0:
-            modelo[k] = (xmedio * dicFemea[k]/100)
-        else:
-            pass
+    indicesDoModelo = list(modelo.keys())
+    vant = 0
     
+    for k,v in modelo.items(): #TODO encontrar nova referencia, ta dando erro na falta dos indices
+    #for i, k in enumerate(indicesDoModelo):
+        try:
+            if k > 0:
+                vant = modelo[k-1] #variável pra pegar o valor anterior #TODO erro tá aqui
+            if k < 60:
+                vpost = modelo[k+1]
+        except: 
+            pass
+        finally:
+            if v == 0:
+                if df_escolhido['sexo'][0] == 'F':
+                    modelo[k] = (xmedio * dicFemea[k]/100)
+                else:
+                    modelo[k] = (xmedio * dicMacho[k]/100)
+                if modelo[k] < vant: # garante que a curva simulada não mostre alturas menores que as anteriores
+                    modelo[k] = vant
+                elif modelo[k] > vpost and vpost > 0:
+                    modelo[k] = vpost
+            else:
+                pass
+    modelo[60] = xmedio
+    vant = 0
+    for k, v in modelo.items():
+        if v < vant:
+            modelo[k] = vant    
+        vant = modelo[k]
     # modelo com as alturas simuladas
     return modelo
 
