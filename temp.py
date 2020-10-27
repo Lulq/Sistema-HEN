@@ -5,7 +5,7 @@ from simulador import *
 #desenvolvendo predição de crescimento
 
 #indices de meses e porcentagens de altura expandidos
-animal = 'Mistério Xodó do Malta'
+animal = 'Bruma do Estrela Negra'
 dados = pd.read_csv(f'arquivo/{animal}.csv')
 
 indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15,16,17, 18,19,20,21,22,23, 24, 36, 48, 60]

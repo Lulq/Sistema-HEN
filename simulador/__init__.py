@@ -64,6 +64,7 @@ def gerarAlturas(df_escolhido):
     
     for k,v in modelo.items(): #TODO encontrar nova referencia, ta dando erro na falta dos indices
     #for i, k in enumerate(indicesDoModelo):
+
         if k == 48 and v != 0:
             print('\o/')
             if df_escolhido['sexo'][0] == 'F':
@@ -79,6 +80,7 @@ def gerarAlturas(df_escolhido):
         except: 
             pass
         finally:
+
             if v == 0:
                 if df_escolhido['sexo'][0] == 'F':
                     modelo[k] = (xmedio * dicFemea[k]/100)
@@ -86,8 +88,6 @@ def gerarAlturas(df_escolhido):
                     modelo[k] = (xmedio * dicMacho[k]/100)
                 if modelo[k] < vant: # garante que a curva simulada não mostre alturas menores que as anteriores
                     modelo[k] = vant
-                elif modelo[k] > vpost and vpost > 0:
-                    modelo[k] = vpost
             else:
                 pass
     modelo[60] = xmedio
