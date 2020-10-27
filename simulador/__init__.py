@@ -56,6 +56,7 @@ def gerarAlturas(df_escolhido):
         xlist.append(x)
     # Média calculada para 100% de altura
     xmedio = sum(xlist)/len(xlist)
+    print(f'xmedio antes: {xmedio}')
 
     #motor que vai preencher todos os dados zerados do dicionário modelo
     indicesDoModelo = list(modelo.keys())
@@ -63,10 +64,17 @@ def gerarAlturas(df_escolhido):
     
     for k,v in modelo.items(): #TODO encontrar nova referencia, ta dando erro na falta dos indices
     #for i, k in enumerate(indicesDoModelo):
+        if k == 48 and v != 0:
+            print('\o/')
+            if df_escolhido['sexo'][0] == 'F':
+                xmedio = (modelo[48]*100)/dicFemea[48]
+                print(f'xmedio na condicão: {xmedio}')
+            else:
+                xmedio = (modelo[48]*100)/dicMacho[48]
         try:
             if k > 0:
                 vant = modelo[k-1] #variável pra pegar o valor anterior #TODO erro tá aqui
-            if k < 60:
+            elif k < 60:
                 vpost = modelo[k+1]
         except: 
             pass
