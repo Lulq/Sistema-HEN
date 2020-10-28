@@ -84,8 +84,7 @@ def gerarAlturas(df_escolhido):
                     modelo[k] = (xmedio * dicFemea[k]/100)
                 else:
                     modelo[k] = (xmedio * dicMacho[k]/100)
-                if modelo[k] < vant: # garante que a curva simulada não mostre alturas menores que as anteriores
-                    modelo[k] = vant
+                
             else:
                 pass
     modelo[60] = xmedio
@@ -94,6 +93,7 @@ def gerarAlturas(df_escolhido):
         if v < vant:
             modelo[k] = vant    
         vant = modelo[k]
+        
     # modelo com as alturas simuladas
     return modelo
 

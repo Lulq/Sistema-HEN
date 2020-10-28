@@ -62,7 +62,7 @@ def plotDicxpadrões(dic,animal,df):
    
     
     plt.plot(indiceidade, femaleref,label='Fêmeas',color='pink',zorder=1)
-    plt.plot(indiceidade, maleref, label='Machos',color='lightcyan',zorder=2)
+    plt.plot(indiceidade, maleref, label='Machos',color='paleturquoise',zorder=2) #lightcyan
    
     plotDic(dic,animal)
     
