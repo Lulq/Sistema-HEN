@@ -51,7 +51,7 @@ while True:
                                     escolhido2 = cadastrados[resposta4 - 1]
                                     plotXplot(df_escolhido, escolhido2)
                                 elif resposta3 == 3:
-                                    plotDicxpadrões(gerarAlturas(df_escolhido), escolhido)
+                                    plotDicxpadrões(gerarAlturas(df_escolhido), escolhido, df_escolhido)
                                     break
                                      
 

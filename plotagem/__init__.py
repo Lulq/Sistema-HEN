@@ -42,12 +42,12 @@ def plotXplot(a,b):
     return plt.show()
 
 def plotDic(dic,animal):
-    plt.plot(list(dic.keys()), list(dic.values()),label=animal,marker='o') #TODO mudar nome do label
-    plt.title(animal)
+    plt.plot(list(dic.keys()), list(dic.values()),label='Crescimento simulado',marker='o',color='blueviolet') #TODO mudar nome do label
+    plt.title(f'{animal} (Simulação)')
     plt.ylabel('Altura de cernelha(cm)')
     plt.xlabel('Idade(meses)')
     
-def plotDicxpadrões(dic,animal, male=True,female=True):
+def plotDicxpadrões(dic,animal,df):
     maleref = [93.47550000000001, 102.414, 108.3225, 113.4735, 117.26100000000001, 120.4425, 122.8665, 124.836,
                126.957, 128.6235, 130.7445, 131.9565, 133.32, 133.92600000000002, 134.53199999999998, 135.138,
                135.744, 136.35, 136.95600000000002, 137.56199999999998, 138.168, 138.774, 139.38, 140.1375,
@@ -59,15 +59,15 @@ def plotDicxpadrões(dic,animal, male=True,female=True):
     indiceidade = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 36, 48, 60]
 
 
-    if male:
-        plt.plot(indiceidade, maleref,label='Machos')
-    if female:
-        plt.plot(indiceidade,femaleref,label='Fêmeas')
-    elif male and female:
-        plt.plot(indiceidade, femaleref,label='Fêmeas')
-        plt.plot(indiceidade, maleref, label='Machos')
-
+   
+    
+    plt.plot(indiceidade, femaleref,label='Fêmeas',color='pink',zorder=1)
+    plt.plot(indiceidade, maleref, label='Machos',color='lightcyan',zorder=2)
+   
     plotDic(dic,animal)
+    
+    plt.scatter(df['meses informados'],df['medidas'], label='Medidas reais',marker='o',color='orange',zorder=4)
+    
     plt.legend(loc="best")
 
     return plt.show()

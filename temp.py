@@ -24,4 +24,4 @@ gerado = gerarAlturas(dados)
 print(f'Curva de crescimento simulada: {gerado}')
 
 
-plotDicxpadrões(gerado,animal)
+plotDicxpadrões(gerado,animal,dados)
