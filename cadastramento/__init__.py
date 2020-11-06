@@ -189,7 +189,7 @@ def insertAltura(animal,mes,medida):
     for i in range(len(colect)):
         listaDeMeses.append(i) #adiciona os índices a lista de meses informados 
         alt = colect[i].get('medidas') #pega as alturas informadas em cada mês informado
-        listaDeAlturas.append(int(alt)) #adiciona as alturas a lista de Alturas
+        listaDeAlturas.append(alt) #adiciona as alturas a lista de Alturas
     
     #adição dos dados informados (adicionar verificação depois)
     listaDeMeses.append(mes) 

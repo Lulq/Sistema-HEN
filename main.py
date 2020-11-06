@@ -101,7 +101,7 @@ while True:
                                         if resposta == 2:
                                             break
                                         elif resposta == 1:
-                                            insertAltura('Lula',mes,alt)
+                                            insertAltura(escolhido,mes,alt)
                                             print(f'Medida:{alt} cm para o mês: {mes} adicionada.')
                                             break
                         #voltar
