@@ -187,7 +187,7 @@ def insertAltura(animal,mes,medida):
     listaDeAlturas = []
     #roda um loop do tamanho da quantidade de dicionários da grande lista que é definida pela quantidade de meses informados
     for i in range(len(colect)):
-        listaDeMeses.append(i) #adiciona os índices a lista de meses informados 
+        listaDeMeses.append(colect[i]['meses informados']) #adiciona os índices a lista de meses informados 
         alt = colect[i].get('medidas') #pega as alturas informadas em cada mês informado
         listaDeAlturas.append(alt) #adiciona as alturas a lista de Alturas
     

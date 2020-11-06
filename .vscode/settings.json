@@ -1,5 +1,13 @@
 {
-    "python.pythonPath": "/home/lulq/miniconda3/bin/python",
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+    "python.pythonPath": "C:\\Users\\lulal\\Anaconda3\\envs\\teste\\python.exe",
+=======
+    "python.pythonPath": "/home/lulq/miniconda3/envs/hensys/bin/python",
+>>>>>>> Stashed changes
+=======
+    "python.pythonPath": "/home/lulq/miniconda3/envs/hensys/bin/python",
+>>>>>>> Stashed changes
     "terminal.explorerKind": "external",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true
