@@ -170,7 +170,7 @@ def insertAltura(animal,mes,medida):
     colect = []
     labels = open(f'arquivo/{animal}.csv','r').readline().strip().split(',') #pega os labels das colunas e bota em uma lista
     #cria uma lista de dicionários com todos os dados do csv
-    with open(f'arquivo/{animal}.csv', 'r') as dados:
+    with open(f'arquivo/{animal}.csv', 'r', encoding='utf8') as dados:
         for dado in dados.readlines():
             d = dado.strip().replace('\n','')
             d_lista = d.split(",")
@@ -220,7 +220,7 @@ def arquivoExiste(nome):
 
 def criarArquivo(nome):
     try:
-        a = open(nome, 'wt+')
+        a = open(nome, 'wt+', encoding='utf8')
         a.close()
     except:
         print('Houve um ERRO na criação do arquivo!')
