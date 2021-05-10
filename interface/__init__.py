@@ -1,5 +1,7 @@
 from colorama import init
 
+
+
 init()
 
 def linha(tam=42):
@@ -19,7 +21,8 @@ def menu(lista, txt):
         print(f'\033[32m{c} - \033[m\033[34m{item}\033[m')
         c += 1
     print(linha())
-    opc = leiaInt('\033[35mSua opção:\033[m ')
+    opc = leiaInt('Sua opção:')
+        
     return opc
 
 

@@ -1,9 +1,15 @@
-,nome,dnasc,sexo,pelagem,meses informados,medidas
-0,Delta Estrela Negra,31-12-2019,M,preta,1,100.0
-1,Delta Estrela Negra,31-12-2019,M,preta,2,110.0
-2,Delta Estrela Negra,31-12-2019,M,preta,4,120.0
-3,Delta Estrela Negra,31-12-2019,M,preta,5,125.0
-4,Delta Estrela Negra,31-12-2019,M,preta,6,125.0
-5,Delta Estrela Negra,31-12-2019,M,preta,7,125.0
-6,Delta Estrela Negra,31-12-2019,M,preta,8,125.0
-7,Delta Estrela Negra,31-12-2019,M,preta,9,127.0
+  ,nome                ,dnasc      ,sexo ,pelagem ,meses informados ,medidas
+0 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,1                ,100.0
+1 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,2                ,110.0
+2 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,4                ,120.0
+3 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,5                ,125.0
+4 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,6                ,125.0
+5 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,7                ,125.0
+6 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,8                ,125.0
+7 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,9                ,127.0
+7 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,10               ,128.0
+7 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,11               ,130.0
+7 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,12               ,132.0
+7 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,13               ,134.0
+7 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,14               ,134.0
+7 ,Delta Estrela Negra ,31-12-2019 ,M    ,preta   ,15               ,135.0
